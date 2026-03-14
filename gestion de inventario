@@ -1,0 +1,117 @@
+
+# SISTEMA DE GESTIÓN DE INVENTARIO PARA UN ALMACÉN
+# Ejemplo de uso de funciones y procedimientos
+
+# Función: registrar_entrada
+# Esta función aumenta la cantidad de productos en inventario
+# cuando llegan nuevos productos al almacén.
+
+def registrar_entrada(inventario, producto, cantidad):
+
+    # Si el producto ya existe en el inventario
+    if producto in inventario:
+
+        # Se suma la nueva cantidad a la existente
+        inventario[producto] += cantidad
+
+    else:
+        # Si el producto no existe, se crea en el inventario
+        inventario[producto] = cantidad
+
+    # Se devuelve el inventario actualizado
+    return inventario
+
+# Función: registrar_salida
+# Esta función reduce la cantidad de productos cuando
+# se venden o se retiran del almacén.
+
+def registrar_salida(inventario, producto, cantidad):
+
+    # Verificamos si el producto existe en el inventario
+    if producto in inventario:
+
+        # Verificamos si hay suficiente stock
+        if inventario[producto] >= cantidad:
+
+            # Restamos la cantidad retirada
+            inventario[producto] -= cantidad
+
+        else:
+            print("No hay suficiente stock disponible")
+
+    else:
+        print("El producto no existe en el inventario")
+
+    return inventario
+
+# Procedimiento: calcular_inventario_optimo
+# Calcula un nivel ideal de inventario basándose en la demanda
+# promedio del producto.
+def calcular_inventario_optimo(demanda_promedio):
+
+    # Fórmula simple para inventario óptimo
+    inventario_optimo = demanda_promedio * 2
+
+    return inventario_optimo
+
+# Función: generar_alerta_reabastecimiento
+# Verifica si el inventario está por debajo del nivel óptimo.
+# Si es así, genera una alerta para reponer productos.
+def generar_alerta_reabastecimiento(inventario, producto, nivel_optimo):
+
+    if inventario.get(producto, 0) < nivel_optimo:
+
+        print("⚠ ALERTA: Se debe reabastecer el producto:", producto)
+
+    else:
+
+        print("Stock suficiente para el producto:", producto)
+
+# PROGRAMA PRINCIPAL
+# Aquí se controla todo el sistema-
+
+# Diccionario que representa el inventario
+# clave = nombre del producto
+# valor = cantidad disponible
+inventario = {}
+
+# Número de operaciones que se realizarán
+operaciones = int(input("Ingrese el número de operaciones: "))
+
+for i in range(operaciones):
+
+    print("\nOperación", i+1)
+
+    print("1. Registrar entrada de producto")
+    print("2. Registrar salida de producto")
+
+    opcion = int(input("Seleccione una opción: "))
+
+    producto = input("Ingrese nombre del producto: ")
+
+    cantidad = int(input("Ingrese cantidad: "))
+
+    # Registrar entrada de productos
+  
+    if opcion == 1:
+
+        inventario = registrar_entrada(inventario, producto, cantidad)
+
+    # Registrar salida de productos
+  
+    elif opcion == 2:
+
+        inventario = registrar_salida(inventario, producto, cantidad)
+
+    # Verificación de inventario óptimo
+  
+    demanda = int(input("Ingrese demanda promedio del producto: "))
+
+    nivel_optimo = calcular_inventario_optimo(demanda)
+
+    generar_alerta_reabastecimiento(inventario, producto, nivel_optimo)
+
+# Mostrar inventario final
+
+print("\nInventario final:")
+print(inventario)
