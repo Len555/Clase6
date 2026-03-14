@@ -1,0 +1,91 @@
+
+# SISTEMA DE NAVEGACIÓN PARA UN VEHÍCULO AUTÓNOMO
+# Ejemplo de modularidad usando funciones y procedimientos
+
+# Función: leer_sensores()
+# Simula la lectura de sensores del vehículo
+# como sensores de proximidad o cámaras.
+# Devuelve la distancia al obstáculo más cercano.
+
+def leer_sensores():
+
+    distancia = float(input("Ingrese distancia al obstáculo más cercano (metros): "))
+
+    return distancia
+
+# Procedimiento: calcular_ruta_optima()
+# Simula el cálculo de la mejor ruta hacia el destino.
+
+def calcular_ruta_optima(origen, destino):
+
+    print("Calculando ruta óptima desde", origen, "hasta", destino)
+
+    # Simulación simple
+    ruta = [origen, "PuntoA", "PuntoB", destino]
+
+    return ruta
+
+
+# Función: detectar_obstaculo()
+# Determina si existe un obstáculo peligroso
+# según la distancia detectada por los sensores.
+
+def detectar_obstaculo(distancia):
+
+    if distancia < 5:
+        return True
+    else:
+        return False
+
+
+# Procedimiento: ajustar_velocidad()
+# Ajusta la velocidad del vehículo dependiendo
+# del tráfico o de la presencia de obstáculos.
+
+def ajustar_velocidad(obstaculo):
+
+    if obstaculo == True:
+
+        velocidad = 0
+        print("Obstáculo detectado → Detener vehículo")
+
+    else:
+
+        velocidad = 60
+        print("Ruta libre → Mantener velocidad")
+
+    return velocidad
+
+# PROGRAMA PRINCIPAL
+# Coordina todas las funciones del sistema
+
+
+print("SISTEMA DE NAVEGACIÓN AUTÓNOMA")
+
+origen = input("Ingrese punto de origen: ")
+destino = input("Ingrese destino: ")
+
+# Calcular ruta
+
+ruta = calcular_ruta_optima(origen, destino)
+
+print("Ruta calculada:", ruta)
+
+# Simulación del recorrido del vehículo
+
+for punto in ruta:
+
+    print("\nVehículo llegando a:", punto)
+
+    # Leer sensores del vehículo
+    distancia = leer_sensores()
+
+    # Detectar obstáculo
+    obstaculo = detectar_obstaculo(distancia)
+
+    # Ajustar velocidad según condiciones
+    velocidad = ajustar_velocidad(obstaculo)
+
+    print("Velocidad actual:", velocidad, "km/h")
+
+print("\nDestino alcanzado")
