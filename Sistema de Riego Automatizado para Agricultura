@@ -1,0 +1,90 @@
+
+# SISTEMA DE RIEGO AUTOMATIZADO PARA AGRICULTURA
+# Optimiza el uso de agua según condiciones del suelo
+
+# Función: leer_sensor_humedad()
+# Simula un sensor que mide la humedad del suelo
+
+def leer_sensor_humedad():
+
+    humedad = float(input("Ingrese nivel de humedad del suelo (%): "))
+
+    return humedad
+
+
+
+# Función: consultar_clima()
+# Consulta una previsión meteorológica básica
+
+def consultar_clima():
+
+    clima = input("¿Se espera lluvia? (si/no): ")
+
+    return clima
+
+# Procedimiento: calcular_riego_optimo()
+# Determina cuánta agua se debe aplicar
+
+def calcular_riego_optimo(humedad, clima):
+
+    if clima == "si":
+
+        print("Se espera lluvia → No es necesario regar")
+
+    else:
+
+        if humedad < 30:
+
+            print("Suelo seco → Activar riego intenso")
+
+        elif humedad < 60:
+
+            print("Humedad moderada → Riego ligero")
+
+        else:
+
+            print("Suelo húmedo → No regar")
+
+
+# Función: controlar_valvulas()
+# Activa o desactiva válvulas de riego en el campo
+
+def controlar_valvulas(seccion, activar):
+
+    if activar:
+
+        print("Válvula activada en sección:", seccion)
+
+    else:
+
+        print("Válvula cerrada en sección:", seccion)
+
+
+# PROGRAMA PRINCIPAL
+
+
+print("SISTEMA DE RIEGO AUTOMATIZADO")
+
+# Leer datos del suelo
+humedad = leer_sensor_humedad()
+
+# Consultar clima
+clima = consultar_clima()
+
+# Calcular riego necesario
+calcular_riego_optimo(humedad, clima)
+
+# Controlar válvulas en distintas zonas
+secciones = int(input("Ingrese número de secciones del campo: "))
+
+for i in range(1, secciones + 1):
+
+    activar = input("¿Activar riego en sección " + str(i) + "? (si/no): ")
+
+    if activar == "si":
+
+        controlar_valvulas(i, True)
+
+    else:
+
+        controlar_valvulas(i, False)
