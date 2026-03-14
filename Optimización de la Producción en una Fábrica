@@ -1,0 +1,83 @@
+
+# SISTEMA DE OPTIMIZACIÓN DE PRODUCCIÓN EN UNA FÁBRICA
+# Ejemplo de programación modular usando funciones
+
+# Función: monitorear_maquinas()
+# Esta función permite conocer el estado de una máquina.
+# Puede estar funcionando, detenida o en mantenimiento.
+def monitorear_maquinas():
+
+    estado = input("Ingrese estado de la máquina (operativa / detenida / mantenimiento): ")
+
+    return estado
+
+# Procedimiento: planificar_mantenimiento()
+# Si una máquina está detenida o presenta fallas,
+# se programa mantenimiento preventivo.
+
+def planificar_mantenimiento(estado):
+
+    if estado == "detenida":
+
+        print("⚠ Máquina detenida → Programar mantenimiento urgente")
+
+    elif estado == "mantenimiento":
+
+        print("Máquina actualmente en mantenimiento")
+
+    else:
+
+        print("Máquina operativa → No requiere mantenimiento")
+
+
+# Función: analizar_rendimiento()
+# Analiza cuántos productos se fabricaron
+# y calcula una eficiencia básica de producción.
+
+def analizar_rendimiento(producido, esperado):
+
+    eficiencia = (producido / esperado) * 100
+
+    return eficiencia
+
+# Procedimiento: ajustar_produccion()
+# Ajusta el ritmo de producción dependiendo de la demanda.
+
+def ajustar_produccion(demanda):
+
+    if demanda > 1000:
+
+        print("Alta demanda → Aumentar producción")
+
+    elif demanda < 500:
+
+        print("Baja demanda → Reducir producción")
+
+    else:
+
+        print("Demanda normal → Mantener producción actual")
+
+
+# PROGRAMA PRINCIPAL
+
+
+print("SISTEMA DE CONTROL DE PRODUCCIÓN")
+
+# Monitorear estado de la máquina
+estado_maquina = monitorear_maquinas()
+
+# Planificar mantenimiento
+planificar_mantenimiento(estado_maquina)
+
+# Analizar rendimiento
+producido = int(input("Ingrese cantidad producida hoy: "))
+esperado = int(input("Ingrese cantidad esperada: "))
+
+eficiencia = analizar_rendimiento(producido, esperado)
+
+print("Eficiencia de producción:", eficiencia, "%")
+
+# Ajustar producción según demanda
+demanda = int(input("Ingrese demanda actual del mercado: "))
+
+ajustar_produccion(demanda)
